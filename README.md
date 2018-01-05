@@ -6,12 +6,13 @@ To build the image, use the following command:
 
     docker build . -t sonar-scanner
 
-When you run the container with no command, e.g. (```docker run --rm -it sonar-scanner:latest```) it simply prints its configuration.
+You can run the container without starting an analysis job with `docker run --rm -it sonar-scanner:latest`. This simply prints the  configuration.
 
-You can run the analysis with the folloing docker command:
+To start an analysis, run the container like this:
 
-    docker run -d --rm -v /Users/nhuber/repos/rx.core.clearing.presellers:$WORKDIR -w=$WORKDIR sonar-scanner:latest sonar-scanner
+    docker run -d --rm -v $HOSTWORKDIR:$WORKDIR -w=$WORKDIR sonar-scanner:latest sonar-scanner
 
-Make sure you map the volume as working directory that contains the `sonar-project.properties` file. This is picked up by the sonar-scanner.
+This command maps a working directory on the host to a directory inside the container. With `-w` we switch to the mapped directory. 
+Make sure you map the volume as working directory that contains the `sonar-project.properties` file. Then this configuration is picked up by the sonar-scanner.
 
-To override the version, you can apoend `-Dsonar.projectVersion=$VERSION` to above command.
+Further customization: You can override the configuratio of the sonar-scanner. For example, to override the version, you can append `-Dsonar.projectVersion=$VERSION` to the command above.

@@ -1,6 +1,6 @@
 FROM openjdk:8-jre-alpine
 
-LABEL maintainer="Nikolaus Huber <nikolaus.huber@reservix.de>"
+LABEL maintainer="Nikolaus Huber <docker.niko_huber@mailhero.io>"
 
 RUN apk add --no-cache curl sed
 
