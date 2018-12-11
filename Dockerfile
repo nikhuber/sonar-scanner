@@ -2,7 +2,7 @@ FROM openjdk:8-jre-alpine
 
 LABEL maintainer="Nikolaus Huber <docker.niko_huber@mailhero.io>"
 
-RUN apk add --no-cache curl sed unzip
+RUN apk add --no-cache curl sed unzip nodejs
 
 # Settings
 ENV SONAR_URL=https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.0.3.778-linux.zip
