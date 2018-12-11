@@ -2,11 +2,13 @@ FROM openjdk:8-jre-alpine
 
 LABEL maintainer="Nikolaus Huber <docker.niko_huber@mailhero.io>"
 
+ARG SONAR_SCANNER_VERSION="3.0.3.778"
+
 RUN apk add --no-cache curl sed unzip
 
 # Settings
-ENV SONAR_URL=https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.0.3.778-linux.zip
-ENV SONAR_RUNNER_HOME=/opt/sonar-scanner-3.0.3.778-linux
+ENV SONAR_URL="https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SONAR_SCANNER_VERSION}-linux.zip"
+ENV SONAR_RUNNER_HOME="/opt/sonar-scanner-${SONAR_SCANNER_VERSION}-linux"
 ENV PATH $PATH:$SONAR_RUNNER_HOME/bin
 
 RUN mkdir -p /opt
