@@ -6,8 +6,13 @@ env:
 
 script:
   - docker build
-        --pull
-        --build-arg SONAR_SCANNER_VERSION="${SONAR_SCANNER_VERSION}"
-        -t "nikhuber/sonar-scanner:${SONAR_SCANNER_VERSION}"
-        -t "nikhuber/sonar-scanner:latest"
-        .
+      --pull
+      --build-arg SONAR_SCANNER_VERSION="${SONAR_SCANNER_VERSION}"
+      -t "nikhuber/sonar-scanner:${SONAR_SCANNER_VERSION}"
+      -t "nikhuber/sonar-scanner:latest"
+      .
+
+after_success:
+  - docker login -u="$DOCKERHUB_USERNAME" -p="$DOCKERHUB_PASSWORD"
+  - docker push nikhuber/sonar-scanner
+  - docker logout
