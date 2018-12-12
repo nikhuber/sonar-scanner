@@ -4,7 +4,7 @@ LABEL maintainer="Nikolaus Huber <docker.niko_huber@mailhero.io>"
 
 ARG SONAR_SCANNER_VERSION="3.0.3.778"
 
-RUN apk add --no-cache curl sed unzip
+RUN apk add --no-cache curl sed unzip nodejs
 
 # Settings
 ENV SONAR_URL="https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SONAR_SCANNER_VERSION}-linux.zip"
