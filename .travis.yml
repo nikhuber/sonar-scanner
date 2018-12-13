@@ -15,7 +15,7 @@ jobs:
             -t "nikhuber/sonar-scanner:latest"
             .
     - stage: publish
-      if: branch = master AND type != pull
+      if: branch = master AND type != pull_request
       script: 
         - docker login -u="$DOCKERHUB_USERNAME" -p="$DOCKERHUB_PASSWORD"
         - docker push nikhuber/sonar-scanner
