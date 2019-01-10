@@ -4,19 +4,16 @@ services:
 env:
   - SONAR_SCANNER_VERSION="3.2.0.1227"
     
-jobs:
-  include:
-    - stage: build
-      script:
-        - docker build
-            --pull
-            --build-arg SONAR_SCANNER_VERSION="${SONAR_SCANNER_VERSION}"
-            -t "nikhuber/sonar-scanner:${SONAR_SCANNER_VERSION}"
-            -t "nikhuber/sonar-scanner:latest"
-            .
-    - stage: publish
-      if: branch = master AND type != pull
-      script: 
-        - docker login -u="$DOCKERHUB_USERNAME" -p="$DOCKERHUB_PASSWORD"
-        - docker push nikhuber/sonar-scanner
-        - docker logout
+script:
+  - docker build
+      --pull
+      --build-arg SONAR_SCANNER_VERSION="${SONAR_SCANNER_VERSION}"
+      -t "nikhuber/sonar-scanner:${SONAR_SCANNER_VERSION}"
+      -t "nikhuber/sonar-scanner:latest"
+      .
+
+deploy:
+  provider: script
+  script: bash docker_push
+  on:
+    branch: master
